@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 开发者实体类，存储开发者的基本信息，包括个人资料、所属国家、领域等信息。
@@ -110,12 +111,12 @@ public class Developer implements Serializable {
     /**
      * 开发者账号的创建时间（ISO 8601 格式）
      */
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     /**
      * 最后更新时间（ISO 8601 格式）
      */
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     /**
      * 项目贡献度，计算开发者在项目中的重要性
