@@ -1,0 +1,50 @@
+server:
+  port: 8091
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/devgauge?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: devgauge
+      password: 123456
+
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 2
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Ov23liL4ucb8ccQyqmJ1                  # 你的 GitHub Client ID
+            client-secret: 38060bee74fd4b2bc1048ab9ac168b79a5377167          # 你的 GitHub Client Secret
+            scope: user                                # 请求的权限范围
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-name: GitHub
+            client-authentication-method: post
+        provider:
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ljh.pojo.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 讯飞星火 AI 配置
+xunfei:
+  client:
+    hostUrl: https://spark-api.xf-yun.com/v3.1/chat
+    appid: fda7144c
+    apiSecret: ODlmNjZiZWIyNTg1MzEzZjEwMTU4MWMw
+    apiKey: f4fbf7d60421f7fa67ea8745a3666e46
