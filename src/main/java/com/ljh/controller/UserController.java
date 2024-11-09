@@ -3,6 +3,7 @@ package com.ljh.controller;
 import com.ljh.result.Result;
 import com.ljh.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -16,7 +17,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @Api(tags = "用户登录相关接口")
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -27,6 +28,7 @@ public class UserController {
      * @param authentication
      * @return
      */
+    @ApiOperation(value = "调用Github的登录接口")
     @GetMapping("/getUserInfo")
     public Result<Map<String, Object>> getUserData(OAuth2AuthenticationToken authentication) {
         log.info("获取用户登录信息：" + authentication.getPrincipal());

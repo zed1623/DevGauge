@@ -1,9 +1,13 @@
-HELP.md
+# 忽略特定文件
+GithubApiConstant.java
+
+# 忽略目录
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# 忽略 IDE 配置
 ### STS ###
 .apt_generated
 .classpath
@@ -32,5 +36,7 @@ build/
 ### VS Code ###
 .vscode/
 
+# 忽略配置文件
 application-secret.yml
 
+et --hard 6bcef91cbd94b5803e34a8bc7d724e938fae13e9

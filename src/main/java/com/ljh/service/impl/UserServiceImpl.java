@@ -1,21 +1,30 @@
 package com.ljh.service.impl;
 
+import com.ljh.manager.ApiCallCountManager;
 import com.ljh.mapper.UserMapper;
 import com.ljh.pojo.entity.User;
 import com.ljh.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    // 使用 AtomicInteger 计数接口调用次数
+    private AtomicInteger apiCallCount = new AtomicInteger(0);
+
 
     /**
      * 获取用户登录信息，并把信息保存到数据库里面
@@ -23,6 +32,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void saveUser(Map<String, Object> userAttributes) {
+        // 增加接口调用次数
+        ApiCallCountManager.incrementCount("loginUser");
         // 提取需要的字段
         Long id = Long.valueOf(userAttributes.get("id").toString()); // 将用户 ID 转换为 Long
         String login = (String) userAttributes.get("login");
@@ -63,4 +74,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 每分钟执行一次，统计接口调用次数
+     */
+    @Scheduled(cron = "0 * * * * ?") // 每分钟的第一个秒钟执行
+    public void reportApiCallCount() {
+        int count = apiCallCount.get();
+        log.info("过去一分钟内loginUser接口调用次数: " + count);
+        // 这里可以做更多的统计操作，比如将次数存储到数据库中
+        apiCallCount.set(0);  // 重置接口调用次数
+    }
 }

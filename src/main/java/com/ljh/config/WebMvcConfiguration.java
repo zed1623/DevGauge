@@ -1,16 +1,10 @@
 package com.ljh.config;
 
-
-
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -20,7 +14,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.List;
 
 /**
  * 配置类，注册web层相关组件
@@ -29,9 +22,6 @@ import java.util.List;
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
-
-
-
     /**
      * 添加 CORS 配置
      */
@@ -39,7 +29,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     protected void addCorsMappings(CorsRegistry registry) {
         log.info("添加 CORS 配置...");
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080")
+//                .allowedOrigins("*")
+                .allowedOriginPatterns("http://localhost:8091")
                 .allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(), HttpMethod.DELETE.name())
                 .allowedHeaders("*")
                 .allowCredentials(true);
@@ -64,7 +55,6 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .build();
         return docket;
     }
-
 
     /**
      * 设置静态资源映射
