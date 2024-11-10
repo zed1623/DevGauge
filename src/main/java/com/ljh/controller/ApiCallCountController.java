@@ -19,7 +19,12 @@ import java.util.stream.Collectors;
 @Api(tags = "接口调用次数相关接口")
 public class ApiCallCountController {
 
-    // 获取某个接口的调用次数
+    /**
+     * 获取某个接口的调用次数
+     *
+     * @param apiName
+     * @return
+     */
     @ApiOperation(value = "获取某个接口的调用次数")
     @GetMapping("/getApiCallCount/{apiName}")
     public Result<Integer> getApiCallCount(@PathVariable String apiName) {
@@ -27,7 +32,11 @@ public class ApiCallCountController {
         return Result.success(count);
     }
 
-    // 获取所有接口的调用次数
+    /**
+     * 获取所有接口的调用次数
+     *
+     * @return
+     */
     @ApiOperation(value = "获取所有接口的调用次数")
     @GetMapping("/getAllApiCallCounts")
     public Result<Map<String, Integer>> getAllApiCallCounts() {

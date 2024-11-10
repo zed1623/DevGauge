@@ -24,6 +24,7 @@ public class GithubApiHealthCheckController {
 
     @Autowired
     private GithubApiStatusWebSocketHandler githubApiStatusWebSocketHandler;
+
     /**
      * 启动健康状态推送
      */
@@ -32,9 +33,9 @@ public class GithubApiHealthCheckController {
     public Result<String> startHealthCheck() {
         log.info("启动健康状态推送");
         boolean isHealthy = githubApiMonitorService.isGithubApiHealthy();
-        String status = isHealthy ? GithubApiConstant.GITHUB_API_USER_SUCCESS: GithubApiConstant.GITHUB_API_USER_ERROR;
+        String status = isHealthy ? GithubApiConstant.GITHUB_API_USER_SUCCESS : GithubApiConstant.GITHUB_API_USER_ERROR;
         // 调用 githubApiStatusWebSocketHandler  sendMessage 推送状态
-        githubApiStatusWebSocketHandler.sendMessage(status,"1");
+        githubApiStatusWebSocketHandler.sendMessage(status, "1");
         return Result.success(status);
     }
 }

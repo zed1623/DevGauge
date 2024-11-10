@@ -25,6 +25,7 @@ public class UserController {
 
     /**
      * 获取用户登录信息，并把信息保存到数据库里面
+     *
      * @param authentication
      * @return
      */
