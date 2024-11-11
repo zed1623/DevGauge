@@ -1,63 +1,20 @@
-# DevGauge
+Gittalent Backend
+项目简介 Gittalent 是一个用于分析 GitHub 项目及其贡献者的后端系统，旨在评估项目的重要性以及开发者的技术能力。系统通过集成 GitHub API，提供一系列丰富的 API 接口，用于获取、存储和分析数据，生成详细的项目和开发者报告。
 
-## 项目简介
+主要功能
 
-DevGauge 是一个基于 Spring Boot 的应用程序，旨在分析 GitHub 开源项目的开发者贡献和项目重要性。通过提供用户友好的界面和强大的数据分析功能，DevGauge 帮助用户更好地理解和评估 GitHub 上的开源项目。
+获取并存储 GitHub 项目数据
+获取并存储 GitHub 开发者数据
+根据国家筛选和筛选开发者，并根据技术能力（TalentRank）排序
+计算并评估开发者的 TalentRank（技术能力评分）
+技术栈
 
-## 功能特性
+语言: Javascript
+框架: vue3
+其他库: canvas、echarts、elementplus
+工具: Git
 
-- **用户认证**: 支持 GitHub OAuth 登录，确保用户的安全性和隐私。
-- **数据分析**: 提供开发者在特定项目中的贡献度分析，帮助评估其影响力。
-- **用户分析**: 支持用户输入Github用户名分析用户
-- **项目评价**: 根据开发者的贡献和项目的活跃度对项目进行评分，便于用户做出明智的选择。
-- **用户界面**: 直观的用户界面，使得用户可以方便地查看和管理数据。
 
-## 技术栈
-
-- **后端**: Java, Spring Boot, MyBatis
-- **数据库**: MySQL
-- **前端**: Vue.js
-- **工具**: Druid (数据库连接池), Redis (缓存)
-
-## 安装与配置
-
-1. **克隆项目**:
-
-   ```
-   git clone https://github.com/zed1623/DevGauge.git
-   ```
-
-2. **数据库配置**:
-
-   - 修改 `application.yml` 文件，确保数据库连接信息正确无误。
-   - 请单独创建 `application-secret.yml`文件保存mysql账号及密码、Github`
-
-3. **依赖管理**:
-
-   - 使用 Maven 构建项目:
-
-   ```
-   mvn clean install
-   ```
-
-4. **运行应用**:
-
-   - 使用以下命令启动 Spring Boot 应用：
-
-   ```
-   mvn spring-boot:run
-   ```
-
-## 使用说明
-
-- 登录后，用户可以通过主界面查看开源项目的详细信息和分析结果。
-- 用户可以选择不同的 GitHub 项目进行深入分析。
-
-## 贡献
-
-欢迎提交问题或请求功能改进。请在 GitHub 上创建 issue 或 pull request。
-
-## 许可证
-
-该项目遵循 [MIT 许可认证](https://opensource.org/licenses/MIT) 。
-
+作者: zed
+Email: 1971286072@qq.com
+如需帮助或更多信息，请随时联系作者。
