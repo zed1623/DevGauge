@@ -277,7 +277,7 @@ public class DeveloperServiceImpl implements DeveloperService {
         double languageScore = languagePercentage.values().stream().mapToDouble(v -> v).sum() * 0.3;
 
         // 计算提交数得分（最多 40 分）
-        double commitsScore = Math.min(totalCommits / 10000, 1) * 40.0;
+        double commitsScore = Math.min(totalCommits / 10000000, 1) * 40.0;
 
         // 综合得分
         double talentRank = repoScore + languageScore + commitsScore;

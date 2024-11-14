@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
      * @param userAttributes
      */
     @Override
-    public void saveUser(Map<String, Object> userAttributes) {
+    public User saveUser(Map<String, Object> userAttributes) {
         // 增加接口调用次数
         ApiCallCountManager.incrementCount("loginUser");
         // 提取需要的字段
@@ -73,6 +73,8 @@ public class UserServiceImpl implements UserService {
             // 如果用户不存在，保存新用户到数据库
             userMapper.save(newUser);
         }
+
+        return newUser;
     }
 
     /**

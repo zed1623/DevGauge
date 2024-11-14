@@ -21,8 +21,8 @@ spring:
         registration:
           github:
             client-id: Ov23liL4ucb8ccQyqmJ1                  # 你的 GitHub Client ID
-            scope: user
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: user,repo
+            redirect-uri: http://localhost:8091/api/user/callback
             authorization-grant-type: authorization_code
             client-name: GitHub
             client-authentication-method: post
@@ -37,3 +37,4 @@ mybatis:
   type-aliases-package: com.ljh.pojo.entity
   configuration:
     map-underscore-to-camel-case: true
+

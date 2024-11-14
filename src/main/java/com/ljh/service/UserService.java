@@ -1,5 +1,7 @@
 package com.ljh.service;
 
+import com.ljh.pojo.entity.User;
+
 import java.util.Map;
 
 public interface UserService {
@@ -9,5 +11,5 @@ public interface UserService {
      *
      * @param userAttributes
      */
-    void saveUser(Map<String, Object> userAttributes);
+    User saveUser(Map<String, Object> userAttributes);
 }
