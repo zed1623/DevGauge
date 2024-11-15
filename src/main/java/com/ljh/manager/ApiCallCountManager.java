@@ -1,8 +1,11 @@
 package com.ljh.manager;
 
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Component
 public class ApiCallCountManager {
     private static final ConcurrentHashMap<String, AtomicInteger> apiCallCountMap = new ConcurrentHashMap<>();
 

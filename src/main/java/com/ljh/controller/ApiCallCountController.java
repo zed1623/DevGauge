@@ -5,6 +5,7 @@ import com.ljh.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
 @Api(tags = "接口调用次数相关接口")
 public class ApiCallCountController {
 
+    @Autowired
+    private ApiCallCountManager apiCallCountManager;
+
     /**
      * 获取某个接口的调用次数
      *
@@ -28,7 +32,7 @@ public class ApiCallCountController {
     @ApiOperation(value = "获取某个接口的调用次数")
     @GetMapping("/getApiCallCount/{apiName}")
     public Result<Integer> getApiCallCount(@PathVariable String apiName) {
-        int count = ApiCallCountManager.getApiCallCount(apiName);  // 调用管理类获取接口调用次数
+        int count = apiCallCountManager.getApiCallCount(apiName);  // 调用管理类获取接口调用次数
         return Result.success(count);
     }
 
@@ -40,7 +44,7 @@ public class ApiCallCountController {
     @ApiOperation(value = "获取所有接口的调用次数")
     @GetMapping("/getAllApiCallCounts")
     public Result<Map<String, Integer>> getAllApiCallCounts() {
-        Map<String, Integer> result = ApiCallCountManager.getAllApiCallCounts().entrySet().stream()
+        Map<String, Integer> result = apiCallCountManager.getAllApiCallCounts().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get()));
         return Result.success(result);
     }

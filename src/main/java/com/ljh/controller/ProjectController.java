@@ -1,5 +1,6 @@
 package com.ljh.controller;
 
+import com.ljh.manager.ApiCallCountManager;
 import com.ljh.pojo.entity.Developer;
 import com.ljh.result.Result;
 import com.ljh.service.DeveloperService;
@@ -7,6 +8,7 @@ import com.ljh.service.ProjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,9 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private ApiCallCountManager apiCallCountManager;
+
     /**
      * 获取 GitHub 上的热门仓库（stars > 10万，最多返回10个）
      *
@@ -32,6 +37,7 @@ public class ProjectController {
      */
     @GetMapping("/hotRepositories")
     public Result<List<Map<String, Object>>> getHotRepositories() {
+        apiCallCountManager.incrementCount("getHotRepositories");
         List<Map<String, Object>> hotRepos = projectService.getHotRepositories();
         return Result.success(hotRepos);
     }

@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/login**", "/login/**", "/error**", "/api/**", "/doc.html#/home", "/api/developer/**",
-                        "/api/githubApi/**", "/api/apiCallCount/**", "/api/websocket/**", "/api/project/**",
+                        "/api/githubApi/**", "/api/apiCallCount/**", "/api/websocket/**", "/api/project/**","/api/ai/**",
                         "/callback") // 将 /login/oauth2/code/github 路径添加到允许访问的路径中
                 .permitAll()
                 .anyRequest().authenticated()

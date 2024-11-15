@@ -34,6 +34,9 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Autowired
     private DeveloperMapper developerMapper;
 
+    @Autowired
+    private ApiCallCountManager apiCallCountManager;
+
     // 使用 ConcurrentHashMap 存储每小时的接口调用次数
     private ConcurrentHashMap<String, AtomicInteger> apiCallCountPerHour = new ConcurrentHashMap<>();
     // 使用线程池
@@ -48,10 +51,6 @@ public class DeveloperServiceImpl implements DeveloperService {
      */
     @Override
     public Developer getUserInfo(String username) {
-
-        // 增加接口调用次数
-        ApiCallCountManager.incrementCount("getUserInfo");
-
         incrementApiCallCount();
 
         RestTemplate restTemplate = new RestTemplate();

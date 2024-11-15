@@ -33,8 +33,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User saveUser(Map<String, Object> userAttributes) {
-        // 增加接口调用次数
-        ApiCallCountManager.incrementCount("loginUser");
         // 提取需要的字段
         Long id = Long.valueOf(userAttributes.get("id").toString()); // 将用户 ID 转换为 Long
         String login = (String) userAttributes.get("login");

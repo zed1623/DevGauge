@@ -4,6 +4,7 @@ import cn.hutool.http.HttpRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ljh.manager.ApiCallCountManager;
 import com.ljh.pojo.entity.User;
 import com.ljh.result.Result;
 import com.ljh.service.UserService;
@@ -32,6 +33,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ApiCallCountManager apiCallCountManager;
+
     @Value("${spring.security.oauth2.client.registration.github.client-id}")
     private String clientId;
 
@@ -57,7 +61,7 @@ public class UserController {
     @GetMapping("/callback")
     public Result<User> getUserData(String code) throws JsonProcessingException {
         log.info("Received code: {}", code);
-
+        apiCallCountManager.incrementCount("getUserData");
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("client_id", clientId);
         paramMap.put("client_secret", clientSecret);

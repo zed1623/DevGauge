@@ -126,6 +126,13 @@
             <version>5.7.2</version>
         </dependency>
 
+        <!-- 智谱Ai -->
+        <dependency>
+            <groupId>cn.bigmodel.openapi</groupId>
+            <artifactId>oapi-java-sdk</artifactId>
+            <version>release-V4-2.3.0</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

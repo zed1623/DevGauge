@@ -1,5 +1,6 @@
 package com.ljh.controller;
 
+import com.ljh.manager.ApiCallCountManager;
 import com.ljh.pojo.entity.Developer;
 import com.ljh.result.Result;
 import com.ljh.service.DeveloperService;
@@ -21,6 +22,9 @@ public class DeveloperController {
     @Autowired
     private DeveloperService developerService;
 
+    @Autowired
+    private ApiCallCountManager apiCallCountManager;
+
     /**
      * 根据GitHub用户名获取用户信息
      *
@@ -30,6 +34,7 @@ public class DeveloperController {
     @ApiOperation(value = "根据GitHub用户名获取用户信息")
     @PostMapping("/getUserInfo")
     public Result<Developer> getUserInfo(String username) {
+        ApiCallCountManager.incrementCount("getUserInfo");
         log.info("根据GitHub用户名获取用户信息:" + username);
         try {
             Developer developer = developerService.getUserInfo(username);
@@ -48,6 +53,7 @@ public class DeveloperController {
      */
     @GetMapping("/topUsers")
     public Result<List<Map<String, Object>>> getTopGitHubUsers() {
+        apiCallCountManager.incrementCount("getTopGitHubUsers");
         List<Map<String, Object>> topUsers = developerService.getTopGitHubUsers();
         return Result.success(topUsers);
     }

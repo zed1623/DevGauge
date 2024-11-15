@@ -22,7 +22,7 @@ spring:
           github:
             client-id: Ov23liL4ucb8ccQyqmJ1                  # 你的 GitHub Client ID
             scope: user,repo
-            redirect-uri: http://localhost:8091/api/user/callback
+            redirect-uri: http://47.113.195.131:8091/api/user/callback
             authorization-grant-type: authorization_code
             client-name: GitHub
             client-authentication-method: post
