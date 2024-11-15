@@ -17,6 +17,7 @@
       <router-link to="/personal">
         <div class="pointer">个人信息</div></router-link
       >
+      <router-link to="/nav"> <div class="pointer">导航页面</div></router-link>
 
       <!-- <router-link to="/location">
         <div class="pointer">成员位置</div></router-link

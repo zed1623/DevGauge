@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <ParticlesBackground />
+    <ParticlesBackground v-if="!isLoginPage" />
     <div class="app-content">
-      <Header />
+      <Header v-if="!isLoginPage" />
       <router-view />
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from "vue";
 import Header from "./components/Header.vue";
 import ParticlesBackground from "./components/ParticlesBackground.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const isLoginPage = computed(() => route.name === "Login");
 </script>
 
 <style scoped lang="scss">
