@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <ParticlesBackground v-if="!isLoginPage" />
+    <ParticlesBackground v-if="!Backshow" />
     <div class="app-content">
-      <Header v-if="!isLoginPage" />
+      <!-- <Header v-if="!isLoginPage" /> -->
       <router-view />
     </div>
   </div>
@@ -15,7 +15,7 @@ import ParticlesBackground from "./components/ParticlesBackground.vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const isLoginPage = computed(() => route.name === "Login");
+const Backshow = computed(() => route.name === "Guide" || route.name === "Nav");
 </script>
 
 <style scoped lang="scss">

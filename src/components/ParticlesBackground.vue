@@ -3,10 +3,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, onUnmounted } from "vue";
 
 const canvas = ref(null);
-
+const resizeHandler = () => {
+  if (canvas.value) {
+    canvas.value.width = window.innerWidth;
+    canvas.value.height = window.innerHeight;
+  }
+};
 onMounted(() => {
   const ctx = canvas.value.getContext("2d");
   const particles = [];
@@ -95,10 +100,11 @@ onMounted(() => {
   draw();
 
   // 处理窗口大小变化
-  window.addEventListener("resize", () => {
-    canvas.value.width = window.innerWidth;
-    canvas.value.height = window.innerHeight;
-  });
+  window.addEventListener("resize", resizeHandler);
+  resizeHandler();
+});
+onUnmounted(() => {
+  window.removeEventListener("resize", resizeHandler);
 });
 </script>
 

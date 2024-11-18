@@ -4,7 +4,9 @@
       <h1>DARPC</h1>
     </div>
     <div class="nav-links">
-      <router-link to="/"><div class="pointer homeNav">首页</div></router-link>
+      <router-link to="/home"
+        ><div class="pointer homeNav">首页</div></router-link
+      >
 
       <router-link to="/overview">
         <div class="pointer">项目概况</div></router-link
@@ -19,10 +21,10 @@
       >
       <router-link to="/nav"> <div class="pointer">导航页面</div></router-link>
 
-      <!-- <router-link to="/location">
-        <div class="pointer">成员位置</div></router-link
+      <router-link to="/guide">
+        <div class="pointer">引导页面</div></router-link
       >
-      <router-link to="/chat"> <div class="pointer">AI分析</div></router-link> -->
+      <router-link to="/chat"> <div class="pointer">AI分析</div></router-link>
 
       <!-- <li>个人分析</li>
       <li>成员位置</li> -->

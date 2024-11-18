@@ -7,93 +7,300 @@
         项目，获取有关贡献者、排名等方面的深入见解。
       </p>
     </div>
-
-    <button class="start-analysis-button">开始分析</button>
-
+    <router-link to="/home">
+      <button class="start-analysis-button">开始分析</button>
+    </router-link>
     <div class="grid-container">
       <AnalysisCard
-        title="GitHub 排名"
-        description="发现您的 GitHub 项目的排名。"
+        v-for="(card, index) in analysisCards"
+        :key="index"
+        :title="card.title"
+        :description="card.description"
+        :color="card.color"
+        :icon="card.icon"
+        :route="card.route"
       />
-      <AnalysisCard
-        title="项目排名"
-        description="评估项目的性能指标。"
-        color="#8eedd7"
-      />
-      <AnalysisCard
-        title="贡献者"
-        description="识别并分析贡献者。"
-        color="#98b4ff"
-      />
-      <AnalysisCard title="合作者" description="查看您的项目协作情况。" />
-      <AnalysisCard title="项目分析" description="详细分解项目的各项指标。" />
-      <AnalysisCard title="统计分析" description="深入了解统计数据和趋势。" />
-      <AnalysisCard title="代码质量" description="衡量代码质量并寻找改进点。" />
-      <AnalysisCard title="问题与拉取请求" description="分析问题和拉取请求。" />
-      <AnalysisCard title="提交分析" description="获取提交活动的见解。" />
-      <AnalysisCard title="社区增长" description="监控您的社区参与度。" />
     </div>
+
+    <!-- 左侧和右侧的装饰图案，包括动态齿轮和图标 -->
+    <div class="decorative-element gear decorative-left"></div>
+    <div class="decorative-element gear decorative-right"></div>
+    <div class="decorative-element icon decorative-left-small"></div>
+    <div class="decorative-element icon decorative-right-small"></div>
   </div>
 </template>
 
 <script setup>
 import AnalysisCard from "@/components/AnalysisCard.vue";
+import {
+  faUser,
+  faLink,
+  faInfoCircle,
+  faEye,
+  faRobot,
+  faChartLine,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
+
+const analysisCards = [
+  {
+    title: "GitHub 用户名分析",
+    description: "分析 GitHub 用户名的相关信息，了解用户的贡献和影响力。",
+    color: "#FFB743",
+    icon: faUser,
+    route: "/personal",
+  },
+  {
+    title: "仓库链接分析",
+    description: "输入仓库链接，获取仓库的详细分析和统计信息。",
+    color: "#FF8567",
+    icon: faLink,
+    route: "/home",
+  },
+  {
+    title: "个人信息页面",
+    description: "查看和编辑您的个人信息和偏好设置。",
+    color: "#63D5FF",
+    icon: faInfoCircle,
+    route: "/user",
+  },
+  {
+    title: "监控页面",
+    description: "监控 GitHub 项目和用户的活动情况。",
+    color: "#8EEDD7",
+    icon: faEye,
+    route: "/analyse",
+  },
+  {
+    title: "AI 问答页面",
+    description: "使用 AI 进行 GitHub 相关问题的智能回答。",
+    color: "#98B4FF",
+    icon: faRobot,
+    route: "/chat",
+  },
+  {
+    title: "项目排行页面",
+    description: "查看 GitHub 项目的排行情况。",
+    color: "#FF6F61",
+    icon: faChartLine,
+    route: "/projectRank",
+  },
+  {
+    title: "个人排行页面",
+    description: "查看在 GitHub 中的用户排行情况。",
+    color: "#71EFA3",
+    icon: faTrophy,
+    route: "/userRank",
+  },
+];
 </script>
 
-<style>
-.container {
+<style scoped>
+/* .container {
+  position: relative;
   width: 90%;
   margin: 0 auto;
   text-align: center;
+  background: linear-gradient(45deg, #ffd56b, #f36e3a);
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+} */
+.container {
+  display: flex;
+  flex-direction: column; /* 垂直排列内容 */
+  justify-content: space-between; /* 根据内容调整间距 */
+  align-items: center;
+  width: 100vw; /* 占满宽度 */
+  height: 100%; /* 刚好占满视口高度 */
+  min-height: 100vh;
+  background: linear-gradient(45deg, #ffd56b, #f36e3a);
+  padding: 0px; /* 避免内容贴边 */
+  box-sizing: border-box; /* 包含 padding */
+  text-align: center;
+  overflow: hidden;
+  overflow-y: auto; /* 内容高度超出时启用滚动条 */
+  overflow-x: hidden; /* 禁止水平滚动条 */
+  /* border-radius: 20px; */
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); */
 }
-.header {
+/* .header {
   margin-top: 30px;
+  color: #ffffff;
+} */
+.header {
+  flex: 0 0 auto; /* 保持内容固定大小 */
+  margin-top: 20px;
+  color: #ffffff;
 }
 .header h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
-}
-.header p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-top: 40px;
-}
-.card {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  text-align: center;
-}
-.card:hover {
-  transform: translateY(-10px);
-}
-.card h3 {
-  font-size: 1.5em;
+  font-size: 3.5em;
   margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
-.card p {
-  font-size: 1em;
-  color: #666;
+
+.header p {
+  font-size: 1.4em;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
+
 .start-analysis-button {
   margin-top: 40px;
-  padding: 15px 30px;
-  font-size: 1.5em;
-  color: #fff;
-  background-color: #eff375;
+  padding: 20px 40px;
+  font-size: 1.8em;
+  color: #ffffff;
+  background-color: #ff6f61;
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
+
 .start-analysis-button:hover {
-  background-color: #e63946;
+  background-color: #ff3b30;
+  transform: scale(1.05);
 }
+
+/* .grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px auto;
+  padding: 0 100px;
+  max-width: 1200px;
+} */
+.grid-container {
+  flex: 1 0 auto; /* 可扩展到剩余空间 */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 20px 0;
+  box-sizing: border-box;
+}
+.card {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  width: 260px;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card h3 {
+  font-size: 1.7em;
+  margin-bottom: 15px;
+  color: #333333;
+}
+
+.card p {
+  font-size: 1.1em;
+  color: #555555;
+}
+
+/* 背景装饰元素 */
+.decorative-element {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  display: block; /* 确保显示 */
+  z-index: -1;
+}
+
+/* 齿轮装饰 */
+.gear {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #f36e3a, #ffb743);
+  clip-path: polygon(
+    50% 0%,
+    60% 20%,
+    80% 20%,
+    100% 40%,
+    80% 60%,
+    100% 80%,
+    80% 100%,
+    60% 80%,
+    50% 100%,
+    40% 80%,
+    20% 80%,
+    0% 60%,
+    20% 40%,
+    0% 20%,
+    20% 20%,
+    40% 20%
+  );
+  animation: spin 10s linear infinite;
+}
+
+/* 分析图标 */
+.icon {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #98b4ff, #8eedd7);
+  clip-path: circle(50%);
+}
+
+/* 左侧装饰图案 */
+.decorative-left {
+  top: 20%;
+  left: 20px;
+}
+
+.decorative-left-small {
+  bottom: 30%;
+  left: 20px;
+}
+
+/* 右侧装饰图案 */
+.decorative-right {
+  bottom: 20%;
+  right: 20px;
+}
+
+.decorative-right-small {
+  top: 30%;
+  right: 20px;
+}
+.start-analysis-button {
+  flex: 0 0 auto; /* 固定大小按钮 */
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.4em;
+  color: #ffffff;
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+/* 动画：旋转齿轮 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* * {
+  box-sizing: border-box;
+} */
 </style>

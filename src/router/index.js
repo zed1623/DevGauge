@@ -2,15 +2,18 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Analyse from '../views/Analyse.vue';
 import Personal from '../views/Personal.vue';
-import Location from '../views/Location.vue';
+import Guide from '../views/Guide.vue';
 import Overview from '../views/Overview.vue';
 import Chat from '../views/Chat.vue';
 import Login from '../views/Login.vue';
 import Nav from '../views/Nav.vue';
+import User from '../views/User.vue';
+import UserRank from '../views/UserRank.vue';
+import ProjectRank from '../views/ProjectRank.vue';
 
 const routes = [
     {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: Home,
         // meta: { requiresAuth: true },
@@ -28,9 +31,9 @@ const routes = [
         // meta: { requiresAuth: true },
     },
     {
-        path: '/location',
-        name: 'Location',
-        component: Location,
+        path: '/',
+        name: 'Guide',
+        component: Guide,
         // meta: { requiresAuth: true },
     },
     {
@@ -49,6 +52,24 @@ const routes = [
         path: '/nav',
         name: 'Nav',
         component: Nav,
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/user',
+        name: 'User',
+        component: User,
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/projectRank',
+        name: 'ProjectRank',
+        component: ProjectRank,
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/userRank',
+        name: 'UserRank',
+        component: UserRank,
         // meta: { requiresAuth: true },
     },
     {
