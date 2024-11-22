@@ -1,5 +1,9 @@
 <template>
-  <div class="card" :style="{ backgroundColor: color }" @click="navigate">
+  <div
+    class="card"
+    :style="{ background: `linear-gradient(90deg, ${colorFrom}, ${colorTo})` }"
+    @click="navigate"
+  >
     <font-awesome-icon :icon="icon" class="card-icon" />
     <h3>{{ title }}</h3>
     <p>{{ description }}</p>
@@ -12,9 +16,10 @@ import { useRouter } from "vue-router"; // 引入路由功能
 const props = defineProps({
   title: String,
   description: String,
-  color: String,
+  colorFrom: String, // 渐变起始颜色
+  colorTo: String, // 渐变结束颜色
   icon: Object, // 图标是一个对象
-  route: String, // 新增 route 属性，用于定义跳转路径
+  route: String, // 跳转路径
 });
 
 const router = useRouter();

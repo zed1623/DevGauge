@@ -235,6 +235,7 @@ const bentoBoxes = fixedBentoBox();
   gap: 20px;
   width: 65%;
   max-width: 900px;
+  height: calc(100vh - 80px);
 }
 
 .card {
@@ -258,7 +259,7 @@ const bentoBoxes = fixedBentoBox();
     gap: 15px;
 
     .card-icon {
-      font-size: 3em;
+      font-size: 2em;
       color: #ff6f61;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     }

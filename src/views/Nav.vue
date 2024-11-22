@@ -16,7 +16,8 @@
         :key="index"
         :title="card.title"
         :description="card.description"
-        :color="card.color"
+        :colorFrom="card.colorFrom"
+        :colorTo="card.colorTo"
         :icon="card.icon"
         :route="card.route"
       />
@@ -46,51 +47,58 @@ const analysisCards = [
   {
     title: "GitHub 用户名分析",
     description: "分析 GitHub 用户名的相关信息，了解用户的贡献和影响力。",
-    color: "#FFB743",
+    colorFrom: "#9b59b6",
+    colorTo: "#8e44ad",
     icon: faUser,
     route: "/personal",
   },
   {
     title: "仓库链接分析",
     description: "输入仓库链接，获取仓库的详细分析和统计信息。",
-    color: "#FF8567",
+    colorFrom: "#f1c40f",
+    colorTo: "#f39c12",
     icon: faLink,
     route: "/home",
   },
   {
     title: "个人信息页面",
     description: "查看和编辑您的个人信息和偏好设置。",
-    color: "#63D5FF",
+    colorFrom: "#e74c3c",
+    colorTo: "#c0392b",
     icon: faInfoCircle,
     route: "/user",
   },
   {
     title: "监控页面",
     description: "监控 GitHub 项目和用户的活动情况。",
-    color: "#8EEDD7",
+    colorFrom: "#2ecc71",
+    colorTo: "#27ae60",
     icon: faEye,
     route: "/analyse",
   },
   {
     title: "AI 问答页面",
     description: "使用 AI 进行 GitHub 相关问题的智能回答。",
-    color: "#98B4FF",
+    colorFrom: "#ff6b6b",
+    colorTo: "#c0392b",
     icon: faRobot,
     route: "/chat",
   },
   {
     title: "项目排行页面",
     description: "查看 GitHub 项目的排行情况。",
-    color: "#FF6F61",
+    colorFrom: "#3498db",
+    colorTo: "#2980b9",
     icon: faChartLine,
     route: "/projectRank",
   },
   {
     title: "个人排行页面",
     description: "查看在 GitHub 中的用户排行情况。",
-    color: "#71EFA3",
+    colorFrom: "#1abc9c",
+    colorTo: "#16a085",
     icon: faTrophy,
-    route: "/userRank",
+    route: "/personal",
   },
 ];
 </script>
