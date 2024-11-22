@@ -131,8 +131,8 @@ public class DeveloperServiceImpl implements DeveloperService {
                 }
             }
         }
-
-        double talentRank = calculateTalentRank(repos.size(), languageUsage, repoScores, totalCommits);
+        // 计算 talentRank
+        double talentRank = calculateTalentRank(repos.size(), languageUsage, repoScores, totalCommits, repos);
 
         // 将 languagePercentage 转换为 JSON 字符串
         String languagePercentageJson = null;
@@ -266,22 +266,46 @@ public class DeveloperServiceImpl implements DeveloperService {
      * @param languagePercentage
      * @param repoScores
      * @param totalCommits
+     * @param repos
      * @return
      */
-    private double calculateTalentRank(int repoCount, Map<String, Double> languagePercentage, Map<String, Double> repoScores, double totalCommits) {
-        // 计算仓库数量得分（最多 30 分）
-        double repoScore = Math.min(repoCount, 10) * 3.0;  // 仓库得分，最大为 30 分
+    private double calculateTalentRank(int repoCount, Map<String, Double> languagePercentage,
+                                       Map<String, Double> repoScores, double totalCommits,
+                                       List<Map<String, Object>> repos) {
+        // 1. 定义各项评分的权重（可以根据需要调整）
+        double repoWeight = 0.3;  // 仓库数量的权重
+        double languageWeight = 0.3;  // 语言占比的权重
+        double commitsWeight = 0.4;  // 提交数的权重
 
-        // 计算语言占比得分（最多 30 分）
-        double languageScore = languagePercentage.values().stream().mapToDouble(v -> v).sum() * 0.3;
+        // 2. 计算非fork仓库的数量
+        long nonForkRepoCount = repos.stream()
+                .filter(repo -> !(boolean) repo.get("fork"))
+                .count();
 
-        // 计算提交数得分（最多 40 分）
-        double commitsScore = Math.min(totalCommits / 10000000, 1) * 40.0;
+        // 3. 计算仓库数量得分，最多30分
+        double repoScore = Math.min(nonForkRepoCount, 10) * 3.0;  // 仓库得分，最大为 30 分
+        // 可以用对数函数来设计递增评分：Math.log(1 + nonForkRepoCount) * 5
+        // double repoScore = Math.log(1 + nonForkRepoCount) * 5;
 
-        // 综合得分
-        double talentRank = repoScore + languageScore + commitsScore;
+        // 4. 计算语言占比得分，最多30分
+        double languageScore = languagePercentage.values().stream()
+                .mapToDouble(Double::doubleValue)
+                .sum() * 0.3;
+
+        // 5. 计算提交数得分，最多40分
+        double commitsScore = Math.min(totalCommits / 100000, 1) * 40.0;
+
+        // 6. 计算总分，基于权重加权
+        double talentRank = (repoScore * repoWeight) +
+                (languageScore * languageWeight) +
+                (commitsScore * commitsWeight);
+
+        // 7. 返回最终得分，确保最大值为100
         return Math.min(talentRank, 100);  // 确保 talentRank 最大值为 100
     }
+
+
+
 
     /**
      * 获取当前小时的接口调用统计

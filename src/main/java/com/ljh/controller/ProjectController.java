@@ -2,6 +2,7 @@ package com.ljh.controller;
 
 import com.ljh.manager.ApiCallCountManager;
 import com.ljh.pojo.entity.Developer;
+import com.ljh.pojo.entity.Project;
 import com.ljh.result.Result;
 import com.ljh.service.DeveloperService;
 import com.ljh.service.ProjectService;
@@ -10,10 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -42,5 +40,16 @@ public class ProjectController {
         return Result.success(hotRepos);
     }
 
+    /**
+     * 根据仓库链接分析项目
+     * @param repoUrl
+     * @return
+     */
+    @PostMapping("/analyzeRepository")
+    public Result<Project> analyzeRepository(@RequestParam String repoUrl) {
+        apiCallCountManager.incrementCount("analyzeRepository");
+        Project project = projectService.analyzeRepository(repoUrl);
+        return Result.success(project);
+    }
 
 }

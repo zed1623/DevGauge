@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljh.mapper.ProjectMapper">
+
+
+    <select id="findById" parameterType="long" resultType="com.ljh.pojo.entity.Project">
+        SELECT * FROM project WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.ljh.pojo.entity.Project">
+        INSERT INTO project (id, name, project_user, total_commits, project_code, description, owner_login, repo_url, stars, forks, issues, created_at, updated_at, importance_score)
+        VALUES (#{id}, #{name}, #{projectUser}, #{totalCommits}, #{projectCode}, #{description}, #{ownerLogin}, #{repoUrl}, #{stars}, #{forks}, #{issues}, #{createdAt}, #{updatedAt}, #{importanceScore})
+    </insert>
+
+    <update id="update" parameterType="com.ljh.pojo.entity.Project">
+        UPDATE project
+        SET name=#{name}, project_user=#{projectUser}, total_commits=#{totalCommits}, project_code=#{projectCode}, description=#{description}, owner_login=#{ownerLogin}, repo_url=#{repoUrl}, stars=#{stars}, forks=#{forks}, issues=#{issues}, created_at=#{createdAt}, updated_at=#{updatedAt}, importance_score=#{importanceScore}
+        WHERE id=#{id}
+    </update>
+
+</mapper>
